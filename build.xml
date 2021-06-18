@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<project name="Primer proyecto de ant" default="jar" basedir=".">
+    <description>
+    Ejemplo sencillo de utilización de ant para compilación
+  </description>
+    <!-- directorios globales para la compilación src-> código, build -> .class, dist->jar -->
+    <property name="src" location="src" />
+    <property name="build" location="build" />
+    <property name="dist" location="dist" />
+    <property name="javadoc" location="javadoc" />
+    <!-- nombre para el jar -->
+    <property name="nameDist" location="MyApp" />
+
+    <target name="init">
+        <!-- generamos un timestamp -->
+        <tstamp />
+        <!-- Create the build directory structure used by compile -->
+        <mkdir dir="${build}" />
+    </target>
+
+    <target name="compile" depends="init" description="compile the source">
+        <!-- Compilando el código en  ${src} a ${build} -->
+        <javac srcdir="${src}" destdir="${build}" />
+    </target>
+
+    <target name="runClass" depends="compile" description="compile the source">
+        <!-- Compilando el código en  ${src} a ${build} -->
+        <java classname="src.principal.Main" classpath="${build}" />
+    </target>
+
+    <target name="jar" depends="compile" description="Generando el directori dist para almacenar el Jar ">
+        <!-- Creamos el directorio dist/lib -->
+        <mkdir dir="${dist}/lib" />
+        <!-- Agregamos todo lo que hay en ${build} en ${nameDist}-${DSTAMP}.jar -->
+        <jar jarfile="${dist}/lib/MyApp-${DSTAMP}.jar" basedir="${build}">
+            <manifest>
+                <attribute name="Main-Class" value="src/tienda/Principal" />
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- Generando la javadoc  opcional: depends="jar"  -->
+    <target name="javadoc">
+        <echo>Making JavaDoc from source</echo>
+        <mkdir dir="${javadoc}" />
+        <javadoc destdir="${javadoc}">
+            <fileset dir="${src}" />
+        </javadoc>
+    </target>
+
+    <!-- Ejecutando el jar  -->
+    <target name="run" depends="jar">
+        <java jar="${dist}/lib/MyApp-${DSTAMP}.jar" fork="true" />
+    </target>
+
+    <!-- Eliminamos los directorios ${build} y ${dist}  -->
+    <target name="clean" description="Eliminando todos los directorios">
+        <delete dir="${build}" />
+        <delete dir="${dist}" />
+        <delete dir="${javadoc}" />
+    </target>
+</project>
