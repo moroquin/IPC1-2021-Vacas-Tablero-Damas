@@ -4,7 +4,7 @@ import src.tablero.*;
 
 public class Main {
     public static void main(String[] args){
-        Tablero t = new Tablero(8, 8);
+        Tablero t = new Tablero(8, 8,true);
 
         t.pintarTablero();
         System.out.println(t.moverFicha(0, 0, 5, 5));

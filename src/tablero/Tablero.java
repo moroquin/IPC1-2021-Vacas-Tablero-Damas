@@ -5,19 +5,31 @@ public class Tablero {
     private Celda[][] tablero; 
     private final int x,y;
 
-    public Tablero(int x, int y){
+    private boolean juegoEnBlancas;
+
+
+    public Tablero(int x, int y, boolean juegoEnBlancas){
+        this.juegoEnBlancas = juegoEnBlancas;
         this.x = x;
         this.y = y;
         tablero = new Celda[x][y];
         inicializarTablero();
-
-        tablero[1][0].setFicha(new Ficha(true, "AA"));
-        tablero[0][1].setFicha(new Ficha(false, "AB"));
-        tablero[0][0].setFicha(new Ficha(true, "AC"));
-        tablero[1][1].setFicha(new Ficha(false, "AD"));
+        inicializarFichas(0, 3, true, "BB");
+        inicializarFichas(5, 8, false, "NN");
+        
         //tablero[0][1].setFicha(new Ficha(false));
 
+    }
 
+    private void inicializarFichas(int ini, int cant, boolean esBlanca, String id){
+        for (int i = ini; i < cant; i++) {
+            for (int j = 0; j < x; j++) {
+                if (tablero[j][i].getEsColor() == !juegoEnBlancas){
+                    tablero[j][i].setFicha(new Ficha(!esBlanca, id ));
+                }
+            }
+            
+        }
     }
 
     public boolean moverFicha(int posXIni, int posYIni, int posXFin, int posYFin){

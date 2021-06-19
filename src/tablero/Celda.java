@@ -23,6 +23,10 @@ public class Celda {
         this.ficha = f;
     }
 
+    public boolean getEsColor(){
+        return this.esColor;
+    }
+
     public Ficha getFicha(){
         Ficha tmp = this.ficha;
         this.ficha = null;

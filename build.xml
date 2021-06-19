@@ -34,7 +34,7 @@
         <!-- Agregamos todo lo que hay en ${build} en ${nameDist}-${DSTAMP}.jar -->
         <jar jarfile="${dist}/lib/MyApp-${DSTAMP}.jar" basedir="${build}">
             <manifest>
-                <attribute name="Main-Class" value="src/tienda/Principal" />
+                <attribute name="Main-Class" value="src/principal/Main" />
             </manifest>
         </jar>
     </target>
