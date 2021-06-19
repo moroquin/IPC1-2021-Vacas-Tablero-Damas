@@ -92,6 +92,9 @@ public class Tablero {
 
             
         }
+        for (int i = 0 ; i<x; i++){
+            System.out.print("  "+componerNumeroString(i)+"  ");
+        }
         System.out.println("\n\n");
     }
 

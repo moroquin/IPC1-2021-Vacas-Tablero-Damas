@@ -23,6 +23,13 @@ public class Coordenada {
     public void setY(int y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "Coordenada [x=" + x + ", y=" + y + "]";
+    }
+
+    
     
     
 }

@@ -8,7 +8,7 @@ public class Celda {
     private boolean esColor;
     private Ficha ficha; 
 
-    private char celda = '░';
+    //private char celda = '░';
     private char celdaColor = '█';
     //█▓
 
