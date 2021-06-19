@@ -3,6 +3,11 @@ package src.tablero;
 public class Ficha {
     private boolean esNegra;
 
+    private boolean debeAscender;
+
+    //private int x,y; 
+    private Coordenada posicion;
+
     private char celda = '░';
     private char celdaColor = '█';
     //█▓
@@ -18,7 +23,9 @@ public class Ficha {
         return res;
     }
 
-    public Ficha(boolean esNegra , String id){
+    public Ficha(boolean esNegra , String id, Coordenada posicion, boolean debeAscender){
+        this.debeAscender = debeAscender;
+        this.posicion = posicion;
         this.esNegra = esNegra;
         this.id = id;
     }
@@ -26,5 +33,14 @@ public class Ficha {
     public String getId(){
         return id;
     }
-    
+
+    public Coordenada[] getMovimientosPosibles(int x, int y){
+        Coordenada[] res = new Coordenada[4];
+        int cont =0;
+
+
+        return res;
+    }
+
+
 }
