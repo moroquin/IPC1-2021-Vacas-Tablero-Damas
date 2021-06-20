@@ -33,7 +33,6 @@ public class Celda {
 
     public Ficha getFicha(){
         Ficha tmp = this.ficha;
-        this.ficha = null;
         return tmp;
     }
 

@@ -52,8 +52,10 @@ public class Ficha {
 
         int cont = this.evaluarMovimiento(-1, movY, this.posicion, res, 0);
         cont = this.evaluarMovimiento(+1, movY, this.posicion, res, cont);
-
         
+
+
+        /*
         System.out.println("Movimientos posibles - pos ini " + this.posicion.toString());
         for (int i = 0; i < res.length; i++) {
             if (res[i] != null) {
@@ -61,7 +63,11 @@ public class Ficha {
             }
 
         }
+*/
 
+        if (cont == 0){
+            res = null;
+        }
         return res;
     }
 

@@ -71,10 +71,14 @@ public class Tablero {
     }
 
     public boolean moverFicha(String id, boolean esBlanca, Coordenada posicionFinal){
+        
+        return moverFicha(this.getFicha(id, esBlanca), posicionFinal);
+    }
+
+    public boolean moverFicha(Ficha ficha, Coordenada posicionFinal){
         boolean respuesta = false;
         Celda tmpCelda = null;
         
-        Ficha ficha = this.getFicha(id, esBlanca);
         if (ficha != null){
             Celda iniCelda = this.getCelda(ficha.getCoordenada());
             if (!(tmpCelda=tablero[posicionFinal.getX()][posicionFinal.getY()]).ocupadaPorFicha()){
