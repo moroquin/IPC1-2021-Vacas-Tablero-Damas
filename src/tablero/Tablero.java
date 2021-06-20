@@ -76,12 +76,17 @@ public class Tablero {
     }
 
     public boolean moverFicha(Ficha ficha, Coordenada posicionFinal){
+
+
         boolean respuesta = false;
         Celda tmpCelda = null;
         
         if (ficha != null){
             Celda iniCelda = this.getCelda(ficha.getCoordenada());
             if (!(tmpCelda=tablero[posicionFinal.getX()][posicionFinal.getY()]).ocupadaPorFicha()){
+
+                //revisar si puede comer o no 
+
                 tmpCelda.setFicha(ficha, posicionFinal.getX(), posicionFinal.getY());
                 iniCelda.setFicha();
                 respuesta = true;

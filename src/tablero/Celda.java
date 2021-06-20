@@ -14,10 +14,10 @@ public class Celda {
 
 
     public static final String ANSI_WHITE = "\u001B[37m";
-    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+    //public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
     public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String ANSI_RESET = "\u001B[0m";
+    //public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    //public static final String ANSI_RESET = "\u001B[0m";
 
     public void setFicha(Ficha f, int x, int y){
         this.ficha = f;
