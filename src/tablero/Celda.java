@@ -19,8 +19,12 @@ public class Celda {
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
     public static final String ANSI_RESET = "\u001B[0m";
 
-    public void setFicha(Ficha f){
+    public void setFicha(Ficha f, int x, int y){
         this.ficha = f;
+        this.ficha.setCoordenada(x, y);
+    }
+    public void setFicha(){
+        this.ficha = null;
     }
 
     public boolean getEsColor(){

@@ -29,8 +29,8 @@ public class Tablero {
         for (int i = ini; i < cant; i++) {
             for (int j = 0; j < x; j++) {
                 if (tablero[j][i].getEsColor() == !juegoEnBlancas){     
-                    fichas[tipoFicha][(cont-1)]=new Ficha(!esBlanca, componerNumeroString(cont), new Coordenada(j,i), debeAscender);
-                    tablero[j][i].setFicha(fichas[tipoFicha][(cont-1)]);
+                    fichas[tipoFicha][(cont-1)]=new Ficha(!esBlanca, componerNumeroString(cont), new Coordenada(j,i), debeAscender,this);
+                    tablero[j][i].setFicha(fichas[tipoFicha][(cont-1)],j,i );
                     cont++;
                 }
             }
@@ -46,16 +46,49 @@ public class Tablero {
         return res;
     }
 
+    public Ficha getFicha(String id, boolean esBlanca){
+        int tipoFicha=(esBlanca)?0:1;
+        Ficha res = null;
+        int cont = 0;
+        while(cont<fichas[0].length && fichas[0][cont]!=null ){
+            if ((res = fichas[tipoFicha][cont]).getId().equalsIgnoreCase(id)){
+                return res;
+            }
+            cont++;
+        }
+        return res;
+    }
+
     public boolean moverFicha(int posXIni, int posYIni, int posXFin, int posYFin){
         boolean resultado = false;
         if (tablero[posXIni][posYIni].ocupadaPorFicha()){
             if (!tablero[posXFin][posYFin].ocupadaPorFicha()){
-                tablero[posXFin][posYFin].setFicha(tablero[posXIni][posYIni].getFicha());
+                tablero[posXFin][posYFin].setFicha(tablero[posXIni][posYIni].getFicha(), posXFin,posYFin);
                 resultado = true;
             }
         }
         return resultado;
     }
+
+    public boolean moverFicha(String id, boolean esBlanca, Coordenada posicionFinal){
+        boolean respuesta = false;
+        Celda tmpCelda = null;
+        
+        Ficha ficha = this.getFicha(id, esBlanca);
+        if (ficha != null){
+            Celda iniCelda = this.getCelda(ficha.getCoordenada());
+            if (!(tmpCelda=tablero[posicionFinal.getX()][posicionFinal.getY()]).ocupadaPorFicha()){
+                tmpCelda.setFicha(ficha, posicionFinal.getX(), posicionFinal.getY());
+                iniCelda.setFicha();
+                respuesta = true;
+            }
+            //comprobar
+        }
+
+        return respuesta;
+    }
+
+
 
     private void inicializarTablero(){
 

@@ -9,12 +9,19 @@ public class Ficha {
     private Coordenada posicion;
 
     private char celda = '░';
+
+    private Tablero tablero; 
+
     //private char celdaColor = '█';
     // █▓
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_YELLOW = "\u001B[33m";
 
     private String id;
+
+    public Coordenada getCoordenada(){
+        return this.posicion;
+    }
 
     public boolean getEsNegra() {
         return esNegra;
@@ -25,8 +32,9 @@ public class Ficha {
         return res;
     }
 
-    public Ficha(boolean esNegra, String id, Coordenada posicion, boolean debeAscender) {
+    public Ficha(boolean esNegra, String id, Coordenada posicion, boolean debeAscender, Tablero tablero) {
         this.debeAscender = debeAscender;
+        this.tablero = tablero;
         this.posicion = posicion;
         this.esNegra = esNegra;
         this.id = id;
@@ -36,14 +44,14 @@ public class Ficha {
         return id;
     }
 
-    public Coordenada[] getMovimientosPosibles(Tablero t) {
+    public Coordenada[] getMovimientosPosibles() {
         
         Coordenada[] res = new Coordenada[4];
         
         int movY = (debeAscender) ? 1 : -1;
 
-        int cont = this.evaluarMovimiento(-1, movY, this.posicion, t, res, 0);
-        cont = this.evaluarMovimiento(+1, movY, this.posicion, t, res, cont);
+        int cont = this.evaluarMovimiento(-1, movY, this.posicion, res, 0);
+        cont = this.evaluarMovimiento(+1, movY, this.posicion, res, cont);
 
         
         System.out.println("Movimientos posibles - pos ini " + this.posicion.toString());
@@ -57,21 +65,28 @@ public class Ficha {
         return res;
     }
 
-    private int evaluarMovimiento(int movX, int movY, Coordenada pos, Tablero t, Coordenada[] res, int indice){
+    public void setCoordenada(int x, int y){
+        this.posicion.setX(x);
+        this.posicion.setY(y);
+    }
+  
+
+
+    private int evaluarMovimiento(int movX, int movY, Coordenada pos, Coordenada[] res, int indice){
         
         Coordenada evaluando = new Coordenada(pos.getX() + movX, pos.getY() + movY);
-        Celda tmp = t.getCelda(evaluando);
+        Celda tmp = tablero.getCelda(evaluando);
 
         if (tmp != null) {
             if (!tmp.ocupadaPorFicha()) {
                 res[indice] = evaluando;
                 indice++;
             } else {
-                if (tmp.getFicha().getEsNegra() == this.esNegra) {
+                if (tmp.getFicha().getEsNegra() != this.esNegra) {
                     Coordenada evaluando2 = new Coordenada(evaluando.getX() + movX, evaluando.getY() +movY);
-                    tmp = t.getCelda(evaluando2);
+                    tmp = tablero.getCelda(evaluando2);
                     if (!tmp.ocupadaPorFicha()) {
-                        res[indice] = evaluando;
+                        res[indice] = evaluando2;
                         indice++;
                     }
                 }
